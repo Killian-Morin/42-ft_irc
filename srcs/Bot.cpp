@@ -61,7 +61,7 @@ void	Bot::handleBot(Server* server, t_Message* msg, Client* client) {
 		rplMsg = "This awesome bot can give the time with HOUR and some stats about our awesome server with STAT.";
 	}
 	else if (msg->params[1] == "HOUR") {
-		std::time_t	result = std::time(nullptr);
+		std::time_t	result = std::time(NULL);
 		rplMsg = std::asctime(std::localtime(&result));
 		rplMsg.erase(rplMsg.size() - 1);
 	}
