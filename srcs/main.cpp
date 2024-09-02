@@ -6,7 +6,7 @@
 /*   By: kmorin <kmorin@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:31:23 by bberger           #+#    #+#             */
-/*   Updated: 2024/02/06 13:40:05 by kmorin           ###   ########.fr       */
+/*   Updated: 2024/09/02 17:58:32 by kmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	signalHandler(int signal) {
 	g_server_running = false;
 }
 
-int main(int ac, char **av) 
+int main(int ac, char **av)
 {
 	signal(SIGINT, signalHandler);
 
@@ -40,7 +40,7 @@ int main(int ac, char **av)
 
 	if (std::atoi(av[1]) >= 0 && std::atoi(av[1]) <= 65535)
 	{
-		Server server(av[1], av[2]);
+		Server server(std::atoi(av[1]), av[2]);
 		server.run();
 	}
 	else

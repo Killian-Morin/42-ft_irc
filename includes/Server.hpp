@@ -6,7 +6,7 @@
 /*   By: kmorin <kmorin@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:49:28 by pvong             #+#    #+#             */
-/*   Updated: 2024/02/06 23:06:22 by kmorin           ###   ########.fr       */
+/*   Updated: 2024/09/02 17:55:13 by kmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ class Server {
 		std::map<int, bool>					_aggMessagesStatus;
 		int			_serverSocketFd;
 
-		std::string	_port;
+		int			_port;
 		std::string	_password;
 		std::string	_version;
 		std::string	_name;
@@ -78,7 +78,7 @@ class Server {
 		std::pair<int, Bot*>		_bot;
 
 	public:
-		Server(const std::string port, const std::string password);
+		Server(const int port, const std::string password);
 		~Server();
 
 		//SERVER MANAGEMENT

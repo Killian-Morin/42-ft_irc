@@ -6,7 +6,7 @@
 /*   By: kmorin <kmorin@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:49:00 by pvong             #+#    #+#             */
-/*   Updated: 2024/02/06 15:52:07 by kmorin           ###   ########.fr       */
+/*   Updated: 2024/09/02 18:01:30 by kmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ std::string getParams(t_Message* msg, int index) {
  * initialization of the map stocking an instance of all available commands
  * call the launch method that will start the server
  */
-Server::Server(const std::string port, const std::string password) : _port(port), _password(password), _capStatus(false) {
+Server::Server(const int port, const std::string password) : _port(port), _password(password), _capStatus(false) {
 
 	_name = "SERVER-BPHK";
 	_version = "alpha";
@@ -171,7 +171,9 @@ void	Server::launch() {
 
 	_serverAddress.sin_family = AF_INET;					  // IPv4
 	_serverAddress.sin_addr.s_addr = INADDR_ANY;			  // bind to all available interfaces
-	_serverAddress.sin_port = htons(std::atoi(_port.c_str())); // convert port to int and convert to network byte order
+	// old method when _port was a string that converts port to int and convert to network byte order
+	// _serverAddress.sin_port = htons(std::atoi(_port.c_str()));
+	_serverAddress.sin_port = htons(_port); // convert to network byte order
 
 	int optValue = 1;
 	if (setsockopt(_serverSocketFd, SOL_SOCKET, SO_REUSEPORT, &optValue, sizeof(optValue)) < 0) {
@@ -207,7 +209,9 @@ void	Server::launch() {
 
 	botAddress.sin_family = AF_INET;					  // IPv4
 	botAddress.sin_addr.s_addr = INADDR_ANY;			  // bind to all available interfaces
-	botAddress.sin_port = htons(std::atoi(_port.c_str())); // convert port to int and convert to network byte order
+	// old method when _port was a string that converts port to int and convert to network byte order
+	// 	botAddress.sin_port = htons(std::atoi(_port.c_str()));
+	botAddress.sin_port = htons(_port); // convert to network byte order
 
 	int optValue2 = 1;
 	if (setsockopt(botSocket, SOL_SOCKET, SO_REUSEPORT, &optValue2, sizeof(optValue2)) < 0) {
